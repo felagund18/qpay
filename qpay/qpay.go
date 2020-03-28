@@ -24,11 +24,16 @@ func InitQPay(clientID string, clientSecret string) {
 		GrantType:    "client",
 		RefreshToken: "",
 	}, cache.NoExpiration)
+
+	_, err := GetToken()
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 func GetToken() (string, error) {
-	token, err := cacheInstance.Get("token")
-	if err != false {
+	token, found := cacheInstance.Get("token")
+	if !found {
 		log.Println("Token has not found")
 		if _, err := Authenticate(); err != nil {
 			log.Println(err)

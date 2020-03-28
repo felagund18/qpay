@@ -10,24 +10,26 @@ import (
 )
 
 type Bill struct {
-	TemplateID string `json:"template_id"`
-	MerchantID string `json:"merchant_id"`
-	BranchID   string `json:"branch_id"`
-	PosID      string `json:"pos_id"`
-	Receiver   struct {
-		ID          string `json:"id"`
-		RegisterNo  string `json:"register_no"`
-		Name        string `json:"name"`
-		Email       string `json:"email"`
-		PhoneNumber string `json:"phone_number"`
-		Note        string `json:"note"`
-	} `json:"receiver"`
-	InvoiceNo   string `json:"invoice_no"`
-	Date        string `json:"date"`
-	Description string `json:"description"`
-	Amount      int    `json:"amount"`
-	BtukCode    string `json:"btuk_code"`
-	VatFlag     string `json:"vat_flag"`
+	TemplateID  string   `json:"template_id"`
+	MerchantID  string   `json:"merchant_id"`
+	BranchID    string   `json:"branch_id"`
+	PosID       string   `json:"pos_id"`
+	Receiver    Receiver `json:"receiver"`
+	BillNumber   string   `json:"bill_no"`
+	Date        string   `json:"date"`
+	Description string   `json:"description"`
+	Amount      int      `json:"amount"`
+	BtukCode    string   `json:"btuk_code"`
+	VatFlag     string   `json:"vat_flag"`
+}
+
+type Receiver struct {
+	ID          string `json:"id"`
+	RegisterNo  string `json:"register_no"`
+	Name        string `json:"name"`
+	Email       string `json:"email"`
+	PhoneNumber string `json:"phone_number"`
+	Note        string `json:"note"`
 }
 
 type BillResponse struct {
@@ -73,10 +75,10 @@ func CreateBill(bill Bill) (*BillResponse, error) {
 		return nil, err
 	}
 
-	var data BillResponse
+	var data *BillResponse
 	if err := json.Unmarshal(body, &data); err != nil {
 		return nil, err
 	}
 
-	return &data, nil
+	return data, nil
 }
