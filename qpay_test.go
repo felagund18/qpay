@@ -1,26 +1,22 @@
-package main
+package qpay
 
 import (
 	"fmt"
-	"github.com/joho/godotenv"
 	"log"
-
-	"./qpay"
+	"os"
+	"testing"
 )
 
-func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+func TestSchema(t *testing.T) {
+	os.Setenv("QPAY_URL", "https://sandbox.qpay.mn/v1")
+	InitQPay("qpay_test", "1234")
 
-	qpay.InitQPay("qpay_test", "1234")
-	bill, err := qpay.CreateBill(qpay.Bill{
+	bill, err := CreateBill(Bill{
 		TemplateID: "TEST_INVOICE",
 		MerchantID: "TEST_MERCHANT",
 		BranchID:   "1",
 		PosID:      "1",
-		Receiver: qpay.Receiver{
+		Receiver: Receiver{
 			ID:          "1",
 			RegisterNo:  "1",
 			Name:        "John Smith",
@@ -39,11 +35,11 @@ func main() {
 	if err != nil {
 		log.Println(err)
 	}
-	fmt.Println(bill.PaymentID)
-
-	checkStatus, err := qpay.Check("2020-02-02-02")
-	if err != nil {
-		log.Println(err)
-	}
-	fmt.Println(checkStatus.PaymentInfo.PaymentStatus)
+	fmt.Println(bill)
+	//
+	//checkStatus, err := qpay.Check("2020-02-02-02")
+	//if err != nil {
+	//	log.Println(err)
+	//}
+	//fmt.Println(checkStatus.PaymentInfo.PaymentStatus)
 }

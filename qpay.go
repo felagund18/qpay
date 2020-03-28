@@ -27,7 +27,7 @@ func InitQPay(clientID string, clientSecret string) {
 
 	_, err := GetToken()
 	if err != nil {
-		log.Println(err)
+		fmt.Println(err)
 	}
 }
 
