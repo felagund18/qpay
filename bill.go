@@ -15,7 +15,7 @@ type Bill struct {
 	BranchID    string   `json:"branch_id"`
 	PosID       string   `json:"pos_id"`
 	Receiver    Receiver `json:"receiver"`
-	BillNumber   string   `json:"bill_no"`
+	BillNumber  string   `json:"bill_no"`
 	Date        string   `json:"date"`
 	Description string   `json:"description"`
 	Amount      int      `json:"amount"`
