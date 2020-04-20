@@ -64,7 +64,7 @@ type CheckResponse struct {
 
 func Check(billNumber string) (*CheckResponse, error) {
 	requestBody, err := json.Marshal(map[string]string{
-		"merchant_id": os.Getenv("merchant_id"),
+		"merchant_id": os.Getenv("QPAY_MERCHANT_ID"),
 		"bill_no":     billNumber,
 	})
 	if err != nil {
