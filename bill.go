@@ -58,8 +58,6 @@ func CreateBill(bill Bill) (*BillResponse, error) {
 		return nil, err
 	}
 
-	fmt.Println(token)
-
 	req, err := http.NewRequest("POST", os.Getenv("QPAY_URL")+"/bill/create", bytes.NewBuffer(requestBody))
 	if err != nil {
 		log.Error(err)

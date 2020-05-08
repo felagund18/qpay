@@ -3,7 +3,6 @@ package qpay
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"github.com/patrickmn/go-cache"
 	"github.com/pkg/errors"
 	"io/ioutil"
@@ -45,7 +44,7 @@ func Authenticate() (*AuthResponse, error) {
 		return nil, err
 	}
 
-	fmt.Println(string(body), os.Getenv("QPAY_URL") + "/auth/token")
+	//fmt.Println(string(body), os.Getenv("QPAY_URL") + "/auth/token")
 
 	var data AuthResponse
 	if err := json.Unmarshal(body, &data); err != nil {

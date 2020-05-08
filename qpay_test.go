@@ -8,7 +8,11 @@ import (
 )
 
 func TestSchema(t *testing.T) {
-	os.Setenv("QPAY_URL", "https://sandbox.qpay.mn/v1")
+	err := os.Setenv("QPAY_URL", "https://sandbox.qpay.mn/v1")
+	if err != nil {
+		panic(err)
+	}
+
 	InitQPay("qpay_test", "1234")
 
 	bill, err := CreateBill(Bill{
