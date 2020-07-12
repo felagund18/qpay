@@ -1,6 +1,6 @@
 module "github.com/felagund18/qpay/v2"
 
-go 1.14.4
+go 1.14
 
 require (
 	github.com/labstack/gommon v0.3.0
