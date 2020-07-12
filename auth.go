@@ -32,7 +32,7 @@ func Authenticate() (*AuthResponse, error) {
 		return nil, err
 	}
 
-	response, err := http.Post(os.Getenv("QPAY_URL") + "/auth/token", "application/json", bytes.NewBuffer(requestBody))
+	response, err := http.Post(os.Getenv("QPAY_URL")+"/auth/token", "application/json", bytes.NewBuffer(requestBody))
 	if err != nil {
 		return nil, err
 	}

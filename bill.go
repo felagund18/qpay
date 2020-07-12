@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/labstack/gommon/log"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
 )
@@ -48,19 +48,19 @@ type BillResponse struct {
 func CreateBill(bill Bill) (*BillResponse, error) {
 	requestBody, err := json.Marshal(bill)
 	if err != nil {
-		log.Error(err)
+		log.Println(err)
 		return nil, err
 	}
 
 	token, err := GetToken()
 	if err != nil {
-		log.Error(err)
+		log.Println(err)
 		return nil, err
 	}
 
 	req, err := http.NewRequest("POST", os.Getenv("QPAY_URL")+"/bill/create", bytes.NewBuffer(requestBody))
 	if err != nil {
-		log.Error(err)
+		log.Println(err)
 		return nil, err
 	}
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer %v", token))
