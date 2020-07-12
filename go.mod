@@ -1,6 +1,6 @@
-module qpay
+module "qpay"
 
-go 1.14
+go 1.14.4
 
 require (
 	github.com/labstack/gommon v0.3.0
