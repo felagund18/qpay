@@ -1,4 +1,4 @@
-module qpay
+module github.com/felagund18/qpay/v3
 
 go 1.14
 
