@@ -3,11 +3,11 @@ package qpay
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/patrickmn/go-cache"
 	"github.com/pkg/errors"
 	"io/ioutil"
 	"net/http"
 	"os"
+	"time"
 )
 
 type AuthResponse struct {
@@ -51,8 +51,8 @@ func Authenticate() (*AuthResponse, error) {
 		return nil, err
 	}
 
-	cacheInstance.Set("auth_response", data, cache.DefaultExpiration)
-	cacheInstance.Set("token", data.AccessToken, cache.DefaultExpiration)
+	cacheInstance.Set("auth_response", data, time.Minute*30)
+	cacheInstance.Set("token", data.AccessToken, time.Minute*30)
 
 	return &data, nil
 }
